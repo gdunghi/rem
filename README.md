@@ -4,7 +4,7 @@ Reminder tool for scatterbrain.
 
 ### Installation
  
-go get and go install
+go get github.com/daubaris/Rem and go install
 
 ### Usage
 
