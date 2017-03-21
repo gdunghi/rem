@@ -8,4 +8,4 @@ go get and go install
 
 ### Usage
 
-[demo](https://asciinema.org/a/6emmhnucs46jra7seendaz9mu)
+[![asciicast](https://asciinema.org/a/6emmhnucs46jra7seendaz9mu.png)](https://asciinema.org/a/6emmhnucs46jra7seendaz9mu)
