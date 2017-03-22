@@ -75,8 +75,8 @@ func listReminders() error {
 		var content Name
 		switch decoder.Decode(&content) {
 		case nil:
-			fmt.Printf("%s: %s\n", time.Unix(content.Date, 0).String()[:19],
-				content.Description)
+			t := time.Unix(content.Date, 0)
+			fmt.Printf("%s: %s\n", t.Format("2006-01-02 15:04:05"), content.Description)
 		case io.EOF:
 			return nil
 		default:
