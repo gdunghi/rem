@@ -12,7 +12,7 @@ import (
 )
 
 type Name struct {
-	Date        string
+	Date        int64
 	Description string
 }
 
@@ -33,8 +33,6 @@ func newReminder() {
 	checkFile()
 
 	var text string
-	date := time.Now()
-	dateString := date.String()
 
 	file, err := os.OpenFile("reminders.json", os.O_RDWR|os.O_APPEND, os.ModePerm)
 	if err != nil {
@@ -49,8 +47,7 @@ func newReminder() {
 	if ok := scanner.Scan(); ok {
 		text = scanner.Text()
 	}
-
-	reminder := &Name{dateString[:19], text}
+	reminder := &Name{time.Now().Unix(), text}
 	newReminder, err := json.Marshal(&reminder)
 	if err != nil {
 		log.Fatal(err)
@@ -78,7 +75,8 @@ func listReminders() error {
 		var content Name
 		switch decoder.Decode(&content) {
 		case nil:
-			fmt.Printf("%s: %s\n", content.Date, content.Description)
+			t := time.Unix(content.Date, 0)
+			fmt.Printf("%s: %s\n", t.Format("2006-01-02 15:04:05"), content.Description)
 		case io.EOF:
 			return nil
 		default:
