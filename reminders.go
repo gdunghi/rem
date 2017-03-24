@@ -23,9 +23,13 @@ var (
 	helpFlag  = flag.Bool("h", false, "help")
 )
 
+var (
+	path = os.Getenv("GOPATH")
+)
+
 func checkFile() {
-	if _, err := os.Stat("reminders.json"); os.IsNotExist(err) {
-		os.Create("reminders.json")
+	if _, err := os.Stat(path + "reminders.json"); os.IsNotExist(err) {
+		os.Create(path + "reminders.json")
 	}
 }
 
@@ -34,7 +38,7 @@ func newReminder() {
 
 	var text string
 
-	file, err := os.OpenFile("reminders.json", os.O_RDWR|os.O_APPEND, os.ModePerm)
+	file, err := os.OpenFile(path+"reminders.json", os.O_RDWR|os.O_APPEND, os.ModePerm)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,6 +51,7 @@ func newReminder() {
 	if ok := scanner.Scan(); ok {
 		text = scanner.Text()
 	}
+
 	reminder := &Name{time.Now().Unix(), text}
 	newReminder, err := json.Marshal(&reminder)
 	if err != nil {
@@ -57,14 +62,14 @@ func newReminder() {
 }
 
 func removeReminders() {
-	err := os.Remove("reminders.json")
+	err := os.Remove(path + "reminders.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func listReminders() error {
-	file, err := os.Open("reminders.json")
+	file, err := os.Open(path + "reminders.json")
 	if err != nil {
 		return err
 	}
