@@ -1,10 +1,10 @@
-# Rem
+# rem
 
 Reminder tool for scatterbrain.
 
 ### Installation
  
-go get github.com/daubaris/Rem and go install
+go get github.com/daubaris/rem and go install
 
 ### Usage
 
