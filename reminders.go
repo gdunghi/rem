@@ -107,6 +107,7 @@ func main() {
 	}
 
 	if *helpFlag {
+		fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS]\n", os.Args[0])
 		flag.PrintDefaults()
 	}
 
